@@ -14,10 +14,10 @@ ctk.set_appearance_mode("Dark")
 ctk.set_default_color_theme("blue")
 
 
-class ModernAutoPartsERP(ctk.CTk):
+class ModernAutoParts(ctk.CTk):
     def __init__(self):
         super().__init__()
-        self.title("Auto Parts Supply - Enterprise ERP System")
+        self.title("Auto Parts Supply - Enterprise System")
         self.geometry("1340x820")
 
         self.db = DatabaseManager()
@@ -50,7 +50,7 @@ class ModernAutoPartsERP(ctk.CTk):
         brand_frame.pack(fill="x", padx=20, pady=(25, 10))
 
         ctk.CTkLabel(brand_frame, text="⚡ AUTO PARTS", font=ctk.CTkFont(size=20, weight="bold")).pack(anchor="w")
-        ctk.CTkLabel(brand_frame, text="Enterprise ERP System", font=ctk.CTkFont(size=12), text_color="gray").pack(
+        ctk.CTkLabel(brand_frame, text="Enterprise System", font=ctk.CTkFont(size=12), text_color="gray").pack(
             anchor="w")
 
         # Active Role Status Badge
@@ -151,7 +151,7 @@ class ModernAutoPartsERP(ctk.CTk):
         login_container.pack(expand=True, fill="both", padx=40, pady=40)
         self.current_view = login_container
 
-        ctk.CTkLabel(login_container, text="🔑 ERP Gateway Login", font=ctk.CTkFont(size=26, weight="bold")).pack(
+        ctk.CTkLabel(login_container, text="🔑 Auto Parts Shop Login", font=ctk.CTkFont(size=26, weight="bold")).pack(
             pady=(40, 10))
         ctk.CTkLabel(login_container, text="Select your access role to continue", font=ctk.CTkFont(size=14),
                      text_color="gray").pack(pady=(0, 25))
@@ -451,5 +451,5 @@ class ModernAutoPartsERP(ctk.CTk):
 
 
 if __name__ == "__main__":
-    app = ModernAutoPartsERP()
+    app = ModernAutoParts()
     app.mainloop()

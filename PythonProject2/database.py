@@ -24,7 +24,7 @@ class DatabaseManager:
             conn.close()
 
             self.pool = mysql.connector.pooling.MySQLConnectionPool(
-                pool_name="erp_pool",
+                pool_name="ent_pool",
                 pool_size=5,
                 pool_reset_session=True,
                 host=self.host,
@@ -79,7 +79,7 @@ class DatabaseManager:
         default_presets = [
             ('unit', 'pcs'), ('unit', 'set'), ('unit', 'box'), ('unit', 'ltr'), ('unit', 'can'),
             ('particulars', 'Oil filter'), ('particulars', 'Fuel filter'), ('particulars', 'Brake pad'), ('particulars', 'Spark plug'),
-            ('brand', 'Vic'), ('brand', 'Baldwin'), ('brand', 'Bosch'), ('brand', 'NGK')
+            ('brand', 'Shell'), ('brand', 'Toyota'), ('brand', 'WD'), ('brand', 'Honda')
         ]
         cursor.executemany("INSERT IGNORE INTO presets (category, value) VALUES (%s, %s)", default_presets)
 
@@ -118,6 +118,19 @@ class DatabaseManager:
                 labor_cost DECIMAL(10,2) NOT NULL,
                 total_estimate DECIMAL(10,2) NOT NULL,
                 estimate_date DATETIME NOT NULL
+            ) ENGINE=InnoDB
+        """)
+
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS job_estimate_items (
+                estimate_item_id INT AUTO_INCREMENT PRIMARY KEY,
+                estimate_id INT NOT NULL,
+                item_id INT NOT NULL,
+                qty INT NOT NULL,
+                unit_cost DECIMAL(10,2) NOT NULL,
+                subtotal DECIMAL(10,2) NOT NULL,
+                FOREIGN KEY (estimate_id) REFERENCES job_estimates (estimate_id) ON DELETE CASCADE,
+                FOREIGN KEY (item_id) REFERENCES inventory (item_id) ON DELETE RESTRICT
             ) ENGINE=InnoDB
         """)
 

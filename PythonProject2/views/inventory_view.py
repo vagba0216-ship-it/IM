@@ -294,7 +294,7 @@ class InventoryView(ctk.CTkFrame):
 
         grouped = {}
         for item in all_items:
-            part = item["particulars"]
+            part = item["particulars"].strip().title()
             grouped.setdefault(part, []).append(item)
 
         categories_list = list(grouped.keys())
